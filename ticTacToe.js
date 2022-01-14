@@ -1,15 +1,17 @@
 "use strict"
 
-(function gameBoard(){
-    const squares = [];
+const gameBoard = ((){
+    const gameSquares = [];
 })();
 
-(function displayRenderer(){
+const displayRenderer = ((){
 
 })();
 
-function Player(playerName){
-    this.name = playerName;
-    return {};
+function Player(name, gamePiece){
+    const placePiece = (gamePiece) => {
+        // fill gameSquare with gamePiece (x or o)
+    }
+    return {name, placePiece};
 };
 
