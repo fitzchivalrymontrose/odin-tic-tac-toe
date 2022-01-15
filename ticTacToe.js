@@ -1,10 +1,10 @@
 "use strict"
 
-const gameBoard = ((){
+const gameBoard = (() => {
     const gameSquares = [];
 })();
 
-const displayRenderer = ((){
+const displayRenderer = (() => {
 
 })();
 
