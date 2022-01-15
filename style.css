@@ -4,3 +4,41 @@
     padding: 0;
 }
 
+body {
+    
+}
+
+header {
+    text-align: center;
+    height: 10vh;
+    padding: .5em;
+    margin-bottom: .5em;
+    font-size: 36px;
+}
+
+main {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: orangered;
+}
+
+table {
+    width: 30%;
+    border-collapse: collapse;
+    background-color: slategrey;
+    
+}
+
+td {
+    width: 33.3%;
+    border: 5px solid orangered;
+    
+}
+
+td::after {
+    content: "";
+    display: block;
+    margin-top: 100%
+}
