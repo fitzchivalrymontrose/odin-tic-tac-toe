@@ -11,10 +11,17 @@ body {
 
 header {
     text-align: center;
-    height: 10vh;
+    height: min-content;
     padding: .5em;
-    margin-bottom: .5em;
-    font-size: 36px;
+    font-size: 42px;
+}
+
+footer {
+    text-align: center;
+    height: 10vh;
+    padding: .5em 0 1em;
+    margin-top: .5em;
+    font-size: 18px;
 }
 
 main {
@@ -26,15 +33,14 @@ main {
 }
 
 table {
-    width: 30%;
+    width: 40%;
     border-collapse: collapse;
-    background-color: slategrey;
-    
+    background-color: darkslategray; 
 }
 
 td {
     width: 33.3%;
-    border: 5px solid orangered;
+    border: 8px solid orangered;
     
 }
 
