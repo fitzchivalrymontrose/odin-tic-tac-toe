@@ -41,7 +41,6 @@ table {
 td {
     width: 33.3%;
     border: 8px solid orangered;
-    
 }
 
 td::after {
