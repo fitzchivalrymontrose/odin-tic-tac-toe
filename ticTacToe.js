@@ -25,3 +25,9 @@ const gameBoard = (() => {
 })();
 
 gameBoard.updateDisplay();
+
+function player(name, mark){
+    function placeMark(){
+        
+    }
+}
