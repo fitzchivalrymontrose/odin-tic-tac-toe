@@ -2,7 +2,7 @@
 
 /*
 State:
-values of board squares - list
+values of board squares - list//////////////////
 what is displayed at any given time
 player name and marker
 whose turn it is
@@ -21,25 +21,12 @@ test win/lose/draw
 
 */
 
-
 const gameSquareValues = ['', '', '', '', '', '', '', '', '', ''];
 const gameSquares = Array.from(document.querySelectorAll(".square"));
 gameSquares.forEach((square) => {
     square.textContent = gameSquareValues[square.id];
 })
 
-/*
-
-player {
-    name,
-    marker (X or O),
-
-    function placeMarker(){
-
-    }
-}
-
-*/
 let currentPlayer = 'X';
 gameSquares.forEach((square) => {
     square.addEventListener('click', makeMark);
@@ -48,15 +35,41 @@ gameSquares.forEach((square) => {
 function makeMark(e){
     if (e.target.textContent === ''){
         e.target.textContent = currentPlayer;
-        currentPlayer = (currentPlayer) === 'X' ? 'O' : 'X';
+        gameSquareValues[e.target.id] = currentPlayer;
+        
     }
-    checkWinLoseDraw();
+    if (checkWinLose()){
+        alert(`${currentPlayer} Wins!!!`);
+    }
+    else if (checkBoardFullDraw()){
+        alert(`It's a Tie.`);
+    }
+    else {
+        currentPlayer = (currentPlayer) === 'X' ? 'O' : 'X';
+        return;
+    }
 }
 
-function checkWinLoseDraw(){
-    // if win condition >>> player wins
-    // else if board full >>> draw game
-    // else continue playing
+
+
+function checkWinLose(){
+    winConditions.forEach((possibleWin) => {
+        possibleWin.forEach((el) => {
+            if(gameSquareValues[el] !== currentPlayer){
+                return false;
+            }
+            
+        });
+    });
+}
+
+function checkBoardFullDraw(){
+    gameSquareValues.forEach((el) => {
+        if (el === ''){
+            return false;
+        }
+    });
+    
 }
 
 const winConditions = [
@@ -69,3 +82,4 @@ const winConditions = [
     [0, 4, 8],
     [2, 4, 6]
 ];
+
