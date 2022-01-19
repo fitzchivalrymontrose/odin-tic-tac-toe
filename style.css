@@ -36,8 +36,10 @@ footer {
     
 }
 
-.start {
-    
+#start-btn {
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding: .5em;
 }
 
 .game-board {
