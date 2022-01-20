@@ -14,11 +14,7 @@ const winConditions = [
 let currentPlayer = 'X';
 const gameSquares = Array.from(document.querySelectorAll(".square"));
 const startGame = document.querySelector('#start-btn');
-startGame.addEventListener('click', handleStartGame);
-
-function handleStartGame(){
-    newGame();
-}
+startGame.addEventListener('click', newGame);
 
 function renderBoard(){
     gameSquares.forEach((square) => {
