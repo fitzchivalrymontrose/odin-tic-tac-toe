@@ -26,7 +26,6 @@ function makeMark(e){
     if (e.target.textContent === ''){
         e.target.textContent = currentPlayer;
         gameSquareValues[e.target.id] = currentPlayer;
-        
     }
     if (checkWin()){
         alert(`${currentPlayer} Wins!!!`);
@@ -58,15 +57,11 @@ function checkBoardFull(){
     return full == 9;
 }
 
-function resetGameSquareValues(){
-    gameSquareValues.fill('');
-}
-
 function newGame(){
     gameSquares.forEach((square) => {
         square.removeEventListener('click', makeMark);
     });
-    resetGameSquareValues();
+    gameSquareValues.fill('');
     renderBoard();
     currentPlayer = 'X';
     gameSquares.forEach((square) => {
