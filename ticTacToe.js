@@ -21,7 +21,7 @@ test win/lose/draw
 
 */
 
-const gameSquareValues = ['', '', '', '', '', '', '', '', '', ''];
+const gameSquareValues = [null, null, null, null, null, null, null, null, null, null];
 const gameSquares = Array.from(document.querySelectorAll(".square"));
 gameSquares.forEach((square) => {
     square.textContent = gameSquareValues[square.id];
@@ -33,15 +33,15 @@ gameSquares.forEach((square) => {
 });
 
 function makeMark(e){
-    if (e.target.textContent === ''){
+    if (gameSquareValues[e.target.id] === null){
         e.target.textContent = currentPlayer;
         gameSquareValues[e.target.id] = currentPlayer;
         
     }
-    if (checkWinLose()){
+    if (checkWin()){
         alert(`${currentPlayer} Wins!!!`);
     }
-    else if (checkBoardFullDraw()){
+    else if (checkBoardFull()){
         alert(`It's a Tie.`);
     }
     else {
@@ -50,25 +50,17 @@ function makeMark(e){
     }
 }
 
-
-
-function checkWinLose(){
-    winConditions.forEach((possibleWin) => {
-        possibleWin.forEach((el) => {
-            if(gameSquareValues[el] !== currentPlayer){
-                return false;
-            }
-            
-        });
+function checkWin(){
+    return winConditions.some(el => {
+        return el.every(el => {
+            return gameSquareValues[el] === currentPlayer;
+        })
     });
 }
 
-function checkBoardFullDraw(){
-    gameSquareValues.forEach((el) => {
-        if (el === ''){
-            return false;
-        }
-    });
+
+
+function checkBoardFull(){
     
 }
 
