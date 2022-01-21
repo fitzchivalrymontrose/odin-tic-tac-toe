@@ -10,7 +10,7 @@ const winConditions = [
     [0, 4, 8],
     [2, 4, 6]
 ];
-let currentPlayer = 'X';
+let currentPlayer;
 
 const startGame = document.querySelector('#start-btn');
 startGame.addEventListener('click', newGame);
@@ -45,7 +45,7 @@ function newGame(){
     });
 }
 function handleSquareClick(e){
-    console.log(e.target);
+    
 }
 
 const gameBoard = (function() {
