@@ -1,56 +1,5 @@
 "use strict"
 
-const winConditions = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-];
-
-let currentPlayer;
-
-const startGame = document.querySelector('#start-btn');
-startGame.addEventListener('click', newGame);
-
-function checkWin(){
-    return winConditions.some(el => {
-        return el.every(el => {
-            return gameBoard.gameSquareValues[el] === currentPlayer.mark;
-        })
-    });
-}
-
-function checkBoardFull(){
-    let full = 0;
-    gameBoard.gameSquareValues.forEach(el => {
-        if (el === 'X' || el === 'O') {
-            full++;
-        }
-    })
-    return full == 9;
-}
-
-function newGame(){
-    gameBoard.gameSquares.forEach((square) => {
-        square.removeEventListener('click', handleSquareClick);
-    });
-    gameBoard.gameSquareValues.fill('');
-    gameBoard.renderBoard();
-    currentPlayer = player1;
-    gameBoard.gameSquares.forEach((square) => {
-        square.addEventListener('click', handleSquareClick);
-    });
-}
-function handleSquareClick(e){
-    let square = e.target;
-    currentPlayer.makeMark(square, currentPlayer);
-    currentPlayer = (currentPlayer) === player1 ? player2 : player1;
-}
-
 const gameBoard = (function() {
     let gameSquareValues = ['', '', '', '', '', '', '', '', ''];
     const gameSquares = Array.from(document.querySelectorAll(".square"));
@@ -78,10 +27,10 @@ const player = (name, mark) => {
             square.textContent = mark;
             gameBoard.gameSquareValues[square.id] = mark;
         }
-        if (checkWin()){
+        if (gameController.checkWin()){
             alert(`${currentPlayer.name} Wins!!!`);
         }
-        else if (checkBoardFull()){
+        else if (gameController.checkBoardFull()){
             alert(`It's a Tie.`);
         }
         else {
@@ -100,6 +49,68 @@ const player = (name, mark) => {
     }
 };
 
-const player1 = player('Ken', 'X');
-const player2 = player('computer', 'O');
-// currentPlayer = player1;
+// game loop
+const gameController = (function() {
+    const winConditions = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+    
+    let currentPlayer;
+    const player1 = player('Ken', 'X');
+    const player2 = player('computer', 'O');
+    const startGame = document.querySelector('#start-btn');
+    startGame.addEventListener('click', newGame);
+
+    function handleSquareClick(e){
+        let square = e.target;
+        currentPlayer.makeMark(square, currentPlayer);
+        currentPlayer = (currentPlayer) === player1 ? player2 : player1;
+    }
+
+    function checkWin(){
+        return winConditions.some(el => {
+            return el.every(el => {
+                return gameBoard.gameSquareValues[el] === currentPlayer.mark;
+            })
+        });
+    }
+    
+    function checkBoardFull(){
+        let full = 0;
+        gameBoard.gameSquareValues.forEach(el => {
+            if (el === 'X' || el === 'O') {
+                full++;
+            }
+        })
+        return full == 9;
+    }
+
+    function newGame(){
+        gameBoard.gameSquares.forEach((square) => {
+            square.removeEventListener('click', handleSquareClick);
+        });
+        gameBoard.gameSquareValues.fill('');
+        gameBoard.renderBoard();
+        currentPlayer = player1;
+        gameBoard.gameSquares.forEach((square) => {
+            square.addEventListener('click', handleSquareClick);
+        });
+    }
+    return {
+        winConditions,
+        currentPlayer,
+        player1,
+        player2,
+        newGame,
+        handleSquareClick,
+        checkWin,
+        checkBoardFull
+    }
+})();
